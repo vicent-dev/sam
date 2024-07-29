@@ -1,0 +1,11 @@
+server:
+  host: 127.0.0.1
+  port: 8080
+db:
+  user: root
+  pwd: root
+  port: 3306
+  host: database
+  name: sam
+jwt:
+  secret: very_secret

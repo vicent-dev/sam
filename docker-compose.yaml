@@ -1,0 +1,34 @@
+version: '3.9'
+
+services:
+#  app:
+#    build: .
+#    container_name: sam
+#    ports:
+#      - 8080:8080
+#    depends_on:
+#      mariadb:
+#        condition: service_healthy
+#    networks:
+#      - sam
+  database:
+    image: mariadb:10.7
+    container_name: database-sam
+    ports:
+      - 3306:3306
+    volumes:
+      - dbvolume:/var/lib/mysql
+    environment:
+      - MYSQL_DATABASE=sam
+      - MYSQL_ROOT_PASSWORD=root
+    networks:
+      - sam
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      timeout: 5s
+      retries: 10
+volumes:
+  dbvolume:
+
+networks:
+  sam:
